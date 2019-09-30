@@ -42,10 +42,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Model\Role', 'user_roles', 'user_id', 'role_id');
     }
 
-    public function transactions()
-    {
-        return $this->belongsToMany('App\Model\Transaction', 'transaction_roles', 'user_id', 'transaction_id');
-    }
 
     public function hasAnyRole($roles)
     {
@@ -72,19 +68,14 @@ class User extends Authenticatable
         return false;
     }
 
-    public function isSuperAdmin()
+    public function isAdmin()
     {
-        return $this->hasRole('SA');
+        return $this->hasRole('Admin');
     }
 
-    public function isPACD()
+    public function isTeacher()
     {
-        return $this->hasRole('PACD');
-    }
-
-    public function isSC()
-    {
-        return $this->hasRole('SC');
+        return $this->hasRole('Teacher');
     }
 
 
