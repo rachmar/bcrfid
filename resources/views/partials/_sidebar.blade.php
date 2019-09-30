@@ -30,24 +30,26 @@
       </a>
     </li>
 
-    <!-- Start Admin -->
-    @if (Auth::user()->isPACD())
-
-      <li class="{{ Request::segment(2) === 'transaction' ? 'active' : '' }}">
-        <a href="{{ url('admin/transaction')}}">
-          <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Generate Transaction</span>
-        </a>
-      </li>
-
-    @endif
-
-    @if (Auth::user()->isSC())
+    @if (Auth::user()->isAdmin())
 
       <li class="{{ Request::segment(2) === 'track' ? 'active' : '' }}">
         <a href="{{ url('admin/track')}}">
           <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Track</span>
+            <span>General Announcement</span>
+        </a>
+      </li>
+
+      <li class="{{ Request::segment(2) === 'track' ? 'active' : '' }}">
+        <a href="{{ url('admin/track')}}">
+          <i class="fa  fa-building-o" aria-hidden="true"></i>
+            <span>List of Student</span>
+        </a>
+      </li>
+
+      <li class="{{ Request::segment(2) === 'track' ? 'active' : '' }}">
+        <a href="{{ url('admin/track')}}">
+          <i class="fa  fa-building-o" aria-hidden="true"></i>
+            <span>Device Status</span>
         </a>
       </li>
 

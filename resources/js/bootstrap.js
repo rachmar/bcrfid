@@ -9,19 +9,16 @@ window._ = require('lodash');
 
 try {
     window.Popper = require('popper.js').default;
-	window.swal = require('sweetalert2')
+	window.swal = require('sweetalert2');
+    window.Chart = require('chart.js');
     window.$ = window.jQuery = require('jquery');
 
   	require('bootstrap');
-
     require('bootstrap-datepicker');
-
     require('select2');
-    
     require('admin-lte');
     require('fullcalendar');
     require('datatables.net-bs');
-    require('ideal-postcodes-autocomplete');
 
 } catch (e) {}
 
