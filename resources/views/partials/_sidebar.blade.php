@@ -32,24 +32,31 @@
 
     @if (Auth::user()->isAdmin())
 
-      <li class="{{ Request::segment(2) === 'track' ? 'active' : '' }}">
-        <a href="{{ url('admin/track')}}">
+      <li class="{{ Request::segment(2) === 'announcement' ? 'active' : '' }}">
+        <a href="{{ url('admin/announcement')}}">
           <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>General Announcement</span>
+            <span>Announcement</span>
         </a>
       </li>
 
-      <li class="{{ Request::segment(2) === 'track' ? 'active' : '' }}">
-        <a href="{{ url('admin/track')}}">
+      <li class="{{ Request::segment(2) === 'student' ? 'active' : '' }}">
+        <a href="{{ url('admin/student')}}">
           <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>List of Student</span>
+            <span>Student</span>
         </a>
       </li>
 
-      <li class="{{ Request::segment(2) === 'track' ? 'active' : '' }}">
-        <a href="{{ url('admin/track')}}">
+      <li class="{{ Request::segment(2) === 'device' ? 'active' : '' }}">
+        <a href="{{ url('admin/device')}}">
           <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Device Status</span>
+            <span>Device</span>
+        </a>
+      </li>
+
+       <li class="{{ Request::segment(2) === 'log' ? 'active' : '' }}">
+        <a href="{{ url('admin/log')}}">
+          <i class="fa  fa-building-o" aria-hidden="true"></i>
+            <span>Log</span>
         </a>
       </li>
 

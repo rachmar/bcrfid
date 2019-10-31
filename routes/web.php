@@ -17,7 +17,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
-	Route::resource('transaction', 'TransactionController');
-	Route::resource('track', 'TrackController');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkrole'], 'roles' => ['Admin'] ], function () {
+	Route::resource('announcement', 'AnnouncementController');
+	Route::resource('student', 'StudentController');
+	Route::resource('device', 'DeviceController');
+	Route::resource('log', 'LogController');
 });
