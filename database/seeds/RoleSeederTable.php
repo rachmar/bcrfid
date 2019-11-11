@@ -17,8 +17,13 @@ class RoleSeederTable extends Seeder
         
         $admin = new Role();
         $admin->name = 'Admin';
-        $admin->description = 'Admin';
+        $admin->description = 'The Admin';
         $admin->save();
 
+        $teacher = new Role();
+        $teacher->name = 'Teacher';
+        $teacher->description = 'The Teacher';
+        $teacher->save();
+        
     }
 }

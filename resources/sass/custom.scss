@@ -1,0 +1,42 @@
+$background_color_1: #1a2226;
+$background_color_2: #222d32;
+$border_left_color_1: #ffffff;
+
+.skin-blue {
+	.main-header {
+		.logo {
+			background-color: $background_color_1;
+		}
+		.logo {
+			&:hover {
+				background-color: $background_color_2;
+			}
+		}
+
+		.navbar {
+			background-color: $background_color_1;
+		}
+		.navbar {
+			.sidebar-toggle {
+				&:hover {
+					background-color: $background_color_2;
+				}
+			}
+		}
+	}
+
+	.sidebar-menu {
+		>li.active {
+			>a {
+				border-left-color: $border_left_color_1;
+			}
+		}
+	}
+
+}
+
+
+//Make Swal Big
+.swal2-popup {
+	font-size: 1.6rem !important;
+}

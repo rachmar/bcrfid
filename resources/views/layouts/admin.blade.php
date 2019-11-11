@@ -5,13 +5,6 @@
 
     @yield('css')
 
-    <!-- Global Styles -->
-    <style type="text/css">
-        .swal2-popup {
-            font-size: 1.6rem !important;
-        }
-    </style>
-
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -46,8 +39,8 @@
   <script src="{{ asset('js/app.js') }}" ></script>
 
   @yield('script')
+  
 
-  <!-- Global Scripts -->
   @if (session('status'))
     <script type="text/javascript">
       swal(
@@ -57,6 +50,7 @@
       )
     </script>
   @endif
+
 
 </body>
 </html>

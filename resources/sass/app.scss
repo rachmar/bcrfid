@@ -7,6 +7,9 @@
 // Variables
 @import 'variables';
 
+// Custom CSS
+@import 'custom';
+
 // Bootstrap
 @import '~bootstrap/dist/css/bootstrap.css';
 
@@ -26,9 +29,7 @@
 //SweetAlert
 @import '~sweetalert2/dist/sweetalert2.css';
 
-//SweetAlert
+//Select2
 @import '~select2/dist/css/select2.min.css';
 
-//ideal-postcodes-autocomplete
-@import '~ideal-postcodes-autocomplete/css/ideal-postcodes-autocomplete.css';
 
