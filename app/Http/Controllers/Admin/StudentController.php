@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Student;
+use App\Model\Section;
 
 class StudentController extends Controller
 {
@@ -14,7 +16,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.student.index');
+        $sections = Section::all();
+
+        $students = Student::selectRaw('students.*, sections.name as sectname, sections.grade as sectgrade')
+            ->join('sections', 'students.sct_id', '=', 'sections.id')
+            ->get();
+
+        return view('pages.admin.student.index', compact('students','sections'));
     }
 
     /**
@@ -35,7 +43,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $student = new Student();
+        $student->crd_id = $request->crd_id;
+        $student->std_id = $request->std_id;
+        $student->sct_id = $request->sct_id;
+        $student->name = $request->name;
+        $student->parent = $request->parent;
+        $student->phone = $request->phone;
+        $student->save();
+
+        return redirect()->back()->with(['title'=>'Success!','status'=>'Student Succesfully Created!','mode'=>'success']);
     }
 
     /**
@@ -69,7 +87,16 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($request->id);
+        $student->crd_id = $request->crd_id;
+        $student->std_id = $request->std_id;
+        $student->sct_id = $request->sct_id;
+        $student->name = $request->name;
+        $student->parent = $request->parent;
+        $student->phone = $request->phone;
+        $student->save();
+
+        return redirect()->back()->with(['title'=>'Success!','status'=>'Student Succesfully Edited!','mode'=>'success']);
     }
 
     /**
@@ -80,6 +107,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $student->destroy($id); 
+
+        return redirect()->back()->with(['title'=>'Deleted!','status'=>'Student Succesfully Deleted!','mode'=>'success']);
     }
 }
