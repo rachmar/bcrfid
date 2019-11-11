@@ -24,8 +24,8 @@ Route::group([
 	'middleware' => ['auth','checkrole'], 
 	'roles' => ['Admin'] ], function () {
 
-	Route::resource('student', 'StudentController');
 	Route::resource('announcement', 'AnnouncementController');
+	Route::resource('student', 'StudentController');
 	Route::resource('report', 'ReportController');
 	Route::resource('setting', 'SettingController');
 
@@ -36,5 +36,5 @@ Route::group([
 	'namespace' => 'Teacher', 
 	'middleware' => ['auth','checkrole'], 
 	'roles' => ['Teacher'] ], function () {
-	Route::resource('student', 'AttendanceController');
+	Route::resource('attendance', 'AttendanceController');
 });

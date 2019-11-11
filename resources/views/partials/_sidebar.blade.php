@@ -17,9 +17,9 @@
     @if (Auth::user()->isAdmin())
 
       
-      <li class="{{ Request::segment(2) === 'announcements' ? 'active' : '' }}">
+      <li class="{{ Request::segment(2) === 'announcement' ? 'active' : '' }}">
         <a href="{{ route('announcement.index') }}">
-          <i class="fa fa-building" aria-hidden="true"></i>
+          <i class="fa fa-microphone" aria-hidden="true"></i>
             <span>Announcements</span>
         </a>
       </li>
@@ -33,22 +33,35 @@
 
       <li class="{{ Request::segment(2) === 'report' ? 'active' : '' }}">
         <a href="{{ route('report.index') }}">
-          <i class="fa  fa-money" aria-hidden="true"></i>
+          <i class="fa fa-pie-chart" aria-hidden="true"></i>
             <span>Reports</span>
         </a>
       </li>
 
       <li class="{{ Request::segment(2) === 'setting' ? 'active' : '' }}">
         <a href="{{ route('setting.index') }}">
-          <i class="fa  fa-money" aria-hidden="true"></i>
+          <i class="fa fa-cog" aria-hidden="true"></i>
             <span>Settings</span>
         </a>
       </li>
 
     @endif
 
-   
-    <li class="header">Options</li>
+
+    @if (Auth::user()->isTeacher())
+
+      <li class="{{ Request::segment(2) === 'attendance' ? 'active' : '' }}">
+        <a href="{{ route('attendance.index') }}">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>Attendances</span>
+        </a>
+      </li>
+
+    @endif
+
+
+    
+    <li class="header">Option</li>
 
     <li>
 
