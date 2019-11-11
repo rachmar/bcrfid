@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Attendance extends Model
+class Unauthorize extends Model
 {
     //
 }

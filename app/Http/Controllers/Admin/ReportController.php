@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Report;
+use App\Model\Student;
+use App\Model\Section;
+use App\Model\Unauthorize;
 
 class ReportController extends Controller
 {
@@ -14,7 +18,14 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.report.index');
+        $unauthorizes = Unauthorize::all();
+
+        $reports = Report::selectRaw('students.crd_id,students.std_id,students.name,reports.created_at,reports.purpose, students.name , sections.name as sectname, sections.grade as sectgrade')
+            ->join('sections', 'reports.sct_id', '=', 'sections.id')
+            ->join('students', 'reports.std_id', '=', 'students.id')
+            ->get();
+
+        return view('pages.admin.report.index', compact('reports','unauthorizes'));
     }
 
     /**
@@ -46,7 +57,7 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
