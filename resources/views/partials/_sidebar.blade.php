@@ -10,59 +10,65 @@
     </div>
   </div>
 
-  <form action="#" method="get" class="sidebar-form">
-    <div class="input-group">
-      <input type="text" name="q" class="form-control" placeholder="Search...">
-      <span class="input-group-btn">
-          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-          </button>
-        </span>
-    </div>
-  </form>
 
   <ul class="sidebar-menu" data-widget="tree">
-    <li class="header">Settings</li>
-
-    <li class="{{ Request::is('home') ? 'active' : '' }}">
-      <a href="{{ url('home') }}">
-        <i class="fa fa-home"></i>
-          <span>Home</span>
-      </a>
-    </li>
+    <li class="header">Main Menu</li>
 
     @if (Auth::user()->isAdmin())
 
-      <li class="{{ Request::segment(2) === 'announcement' ? 'active' : '' }}">
-        <a href="{{ url('admin/announcement')}}">
-          <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Announcement</span>
+      
+      <li class="{{ Request::segment(2) === 'announcements' ? 'active' : '' }}">
+        <a href="{{ route('announcement.index') }}">
+          <i class="fa fa-building" aria-hidden="true"></i>
+            <span>Announcements</span>
         </a>
       </li>
 
-      <li class="{{ Request::segment(2) === 'student' ? 'active' : '' }}">
-        <a href="{{ url('admin/student')}}">
-          <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Student</span>
+      <li class="{{ Request::segment(2) === 'students' ? 'active' : '' }}">
+        <a href="{{ route('student.index') }}">
+          <i class="fa fa-users" aria-hidden="true"></i>
+            <span>Students</span>
         </a>
       </li>
 
-      <li class="{{ Request::segment(2) === 'device' ? 'active' : '' }}">
-        <a href="{{ url('admin/device')}}">
-          <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Device</span>
+      <li class="{{ Request::segment(2) === 'report' ? 'active' : '' }}">
+        <a href="{{ route('report.index') }}">
+          <i class="fa  fa-money" aria-hidden="true"></i>
+            <span>Reports</span>
         </a>
       </li>
 
-       <li class="{{ Request::segment(2) === 'log' ? 'active' : '' }}">
-        <a href="{{ url('admin/log')}}">
-          <i class="fa  fa-building-o" aria-hidden="true"></i>
-            <span>Log</span>
+      <li class="{{ Request::segment(2) === 'setting' ? 'active' : '' }}">
+        <a href="{{ route('setting.index') }}">
+          <i class="fa  fa-money" aria-hidden="true"></i>
+            <span>Settings</span>
         </a>
       </li>
 
     @endif
 
+   
+    <li class="header">Options</li>
+
+    <li>
+
+      <a  href="{{ route('logout') }}"
+         onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+          <i class="fa fa-circle-o text-red"></i>
+          <span>{{ __('Logout') }}</span>
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+      </form>
+      
+    </li>
 
   </ul>
 
 </section>
+
+
+
+

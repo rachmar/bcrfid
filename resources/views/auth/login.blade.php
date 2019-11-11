@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+<!-- @extends('layouts.auth') -->
 
 @section('content')
 <div class="login-box">
@@ -14,14 +14,14 @@
         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
             @csrf
 
-          <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+          <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
 
-            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" required>
+            <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="Username" required>
 
 
-            @if ($errors->has('email'))
+            @if ($errors->has('username'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('username') }}</strong>
                 </span>
             @endif
 
@@ -49,8 +49,8 @@
 
         <br/>
 
-        <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a><br>
-        <a href="{{ route('register') }}">Register a new membership</a>
+        <!-- <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a><br> -->
+        <!-- <a href="{{ route('register') }}">Register a new membership</a> -->
 
     </div>
 

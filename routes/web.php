@@ -11,16 +11,30 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkrole'], 'roles' => ['Admin'] ], function () {
-	Route::resource('announcement', 'AnnouncementController');
+Route::group([
+	'prefix' => 'admin', 
+	'namespace' => 'Admin', 
+	'middleware' => ['auth','checkrole'], 
+	'roles' => ['Admin'] ], function () {
+
 	Route::resource('student', 'StudentController');
-	Route::resource('device', 'DeviceController');
-	Route::resource('log', 'LogController');
+	Route::resource('announcement', 'AnnouncementController');
+	Route::resource('report', 'ReportController');
+	Route::resource('setting', 'SettingController');
+
+});
+
+Route::group([
+	'prefix' => 'teacher', 
+	'namespace' => 'Teacher', 
+	'middleware' => ['auth','checkrole'], 
+	'roles' => ['Teacher'] ], function () {
+	Route::resource('student', 'AttendanceController');
 });
