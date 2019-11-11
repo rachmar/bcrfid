@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Student;
+use App\Model\Section;
 
 class AnnouncementController extends Controller
 {
@@ -14,7 +16,10 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.announcement.index');
+
+        $sections = Section::all();
+        return view('pages.admin.announcement.index', compact('sections'));
+
     }
 
     /**
