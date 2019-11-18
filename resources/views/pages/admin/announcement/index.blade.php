@@ -10,7 +10,7 @@
   <div class="col-md-6">
     <div class="box box-default">
       <div class="box-header with-border">
-          <h3 class="box-title">Add Item</h3>
+          <h3 class="box-title">Send Announcement</h3>
       </div>
       <div class="box-body">
         <form action="#" class="announce" method="POST">
@@ -18,9 +18,9 @@
               <div class="form-group">
                 <label for="sct_id">Section</label>
                 <select id="sct_id" name="sct_id" class="form-control">
-	            	@foreach ($sections as $section)
-           				<option value="{{ $section->id }}"> {{ $section->grade }} - {{ $section->name}} </option>
-        			@endforeach
+	            	  @foreach ($sections as $section)
+           				 <option value="{{ $section->id }}"> {{ $section->grade }} - {{ $section->name}} </option>
+        			    @endforeach
 	            </select>
               </div>
 
@@ -71,6 +71,17 @@
         }
 
         console.log(data);
+
+        $.ajax({
+          type:"POST",
+          url: "{{ route('announcement.store') }}",
+          data: data,
+          success:function(data){
+              console.log(data);
+          },error: function(error) {
+              console.log(error);
+          }
+        });
 
         swal.fire({
             title: 'Sending Announcement!',

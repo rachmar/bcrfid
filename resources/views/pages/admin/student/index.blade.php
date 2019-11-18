@@ -125,7 +125,7 @@
 
 		    	<div class="form-group">
 		     		<label>Phone Num (*)</label>
-		            <input type="text" name="phone"  class="form-control" required>
+		            <input type="number"  min="11" name="phone"  class="form-control" required>
 		        </div>
 
 
@@ -185,7 +185,7 @@
 
 		    	<div class="form-group">
 		     		<label>Phone Num</label>
-		            <input type="text" id="phone" name="phone"  class="form-control" required>
+		            <input type="number"  min="11" name="phone"  class="form-control" required>
 		        </div>
 
 
