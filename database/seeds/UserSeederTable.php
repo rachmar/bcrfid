@@ -18,24 +18,33 @@ class UserSeederTable extends Seeder
         DB::table('users')->truncate();
         DB::table('user_roles')->truncate();
 
-        $admin  = Role::where('name', 'Admin')->first();
+        $role_osa  = Role::where('name', 'OSA')->first();
+        $role_principal  = Role::where('name', 'Principal')->first();
+        $role_teacher  = Role::where('name', 'Teacher')->first();
 
-        $admin = new User();
-        $admin->name = 'Admin Admin';
-        $admin->email = 'admin@trident.com';
-        $admin->username = 'admin';
-        $admin->password = bcrypt('adminadmin');
-        $admin->save();
-        $admin->roles()->attach($admin);
+        $osa = new User();
+        $osa->name = 'OSA OSA';
+        $osa->email = 'osa@bcrfid.com';
+        $osa->username = 'osa';
+        $osa->password = bcrypt('adminadmin');
+        $osa->save();
+        $osa->roles()->attach($role_osa);
 
+        $principal = new User();
+        $principal->name = 'PRINCIPAL PRINCIPAL';
+        $principal->email = 'principal@bcrfid.com';
+        $principal->username = 'principal';
+        $principal->password = bcrypt('adminadmin');
+        $principal->save();
+        $principal->roles()->attach($role_principal);
 
         $teacher = new User();
-        $teacher->name = 'Teacher Teacher';
-        $teacher->email = 'teacher@trident.com';
+        $teacher->name = 'TEACHER TEACHER';
+        $teacher->email = 'teacher@bcrfid.com';
         $teacher->username = 'teacher';
         $teacher->password = bcrypt('adminadmin');
         $teacher->save();
-        $teacher->roles()->attach($admin);
+        $teacher->roles()->attach($role_teacher);
 
 
 

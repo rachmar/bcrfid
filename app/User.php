@@ -68,14 +68,19 @@ class User extends Authenticatable
         return false;
     }
 
-    public function isAdmin()
+    public function isOSA()
     {
-        return $this->hasRole('Admin');
+        return $this->hasRole('OSA');
     }
 
     public function isTeacher()
     {
         return $this->hasRole('Teacher');
+    }
+
+    public function isPrincipal()
+    {
+        return $this->hasRole('Principal');
     }
 
 

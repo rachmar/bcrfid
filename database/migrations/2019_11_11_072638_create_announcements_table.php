@@ -16,7 +16,6 @@ class CreateAnnouncementsTable extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sct_id');
-            $table->string('subj');
             $table->string('msg');
             $table->timestamps();
         });

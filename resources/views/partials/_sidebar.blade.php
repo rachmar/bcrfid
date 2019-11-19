@@ -15,14 +15,7 @@
     
     <li class="header">Main Menu</li>
 
-    @if (Auth::user()->isAdmin())
-
-      <li class="{{ Request::segment(2) === 'announcement' ? 'active' : '' }}">
-        <a href="{{ route('announcement.index') }}">
-          <i class="fa fa-microphone" aria-hidden="true"></i>
-            <span>Announcements</span>
-        </a>
-      </li>
+    @if (Auth::user()->isOSA())
 
       <li class="{{ Request::segment(2) === 'student' ? 'active' : '' }}">
         <a href="{{ route('student.index') }}">
@@ -31,12 +24,26 @@
         </a>
       </li>
 
+    @endif
+
+
+    @if (Auth::user()->isPrincipal())
+
+      <li class="{{ Request::segment(2) === 'announcement' ? 'active' : '' }}">
+        <a href="{{ route('announcement.index') }}">
+          <i class="fa fa-microphone" aria-hidden="true"></i>
+            <span>Announcements</span>
+        </a>
+      </li>
+
+
       <li class="{{ Request::segment(2) === 'report' ? 'active' : '' }}">
         <a href="{{ route('report.index') }}">
           <i class="fa fa-pie-chart" aria-hidden="true"></i>
             <span>Reports</span>
         </a>
       </li>
+
 
       <li class="{{ Request::segment(2) === 'setting' ? 'active' : '' }}">
         <a href="{{ route('setting.index') }}">
@@ -50,10 +57,10 @@
 
     @if (Auth::user()->isTeacher())
 
-      <li class="{{ Request::segment(2) === 'attendance' ? 'active' : '' }}">
-        <a href="{{ route('attendance.index') }}">
+      <li class="{{ Request::segment(2) === 'report' ? 'active' : '' }}">
+        <a href="{{ route('report.index') }}">
           <i class="fa fa-calendar" aria-hidden="true"></i>
-            <span>Attendances</span>
+            <span>Report</span>
         </a>
       </li>
 

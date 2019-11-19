@@ -19,22 +19,26 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group([
-	'prefix' => 'admin', 
-	'namespace' => 'Admin', 
+	'prefix' => 'osa', 
 	'middleware' => ['auth','checkrole'], 
-	'roles' => ['Admin'] ], function () {
-
-	Route::resource('announcement', 'AnnouncementController');
+	'roles' => ['OSA'] ], function () {
 	Route::resource('student', 'StudentController');
-	Route::resource('report', 'ReportController');
+});
+
+Route::group([
+	'prefix' => 'principal', 
+	'middleware' => ['auth','checkrole'], 
+	'roles' => ['Principal'] ], function () {
+	Route::resource('announcement', 'AnnouncementController');
 	Route::resource('setting', 'SettingController');
 
 });
 
 Route::group([
-	'prefix' => 'teacher', 
-	'namespace' => 'Teacher', 
+	'prefix' => 'report', 
 	'middleware' => ['auth','checkrole'], 
-	'roles' => ['Teacher'] ], function () {
-	Route::resource('attendance', 'AttendanceController');
+	'roles' => ['Principal','Teacher'] ], function () {
+	Route::resource('report', 'ReportController');
 });
+
+
