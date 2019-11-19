@@ -89,13 +89,14 @@
 	</div>	
 
 	@if ( Request::isMethod('post') )
-  		<div class="col-md-12">
+  		<div id="printreport" class="col-md-12">
 		    <div class="box">
 		    	<div class="box-header with-border">
 	          		<h3 class="box-title">Student Reports</h3>
+	          		<button class="btn btn-warning pull-right no-print" onclick="printDiv()">Print Report</button>
 	      		</div>
 		      	<div class="box-body">
-			        <table id="datatable" class="table table-bordered table-striped">
+			        <table  class="table table-bordered table-striped">
 			          <thead>
 			            <tr>
 			              <th>Date</th>
@@ -135,6 +136,19 @@
 	    format: 'yyyy-mm-dd',
 	    autoclose: true
     });
+
+    function printDiv() {
+        var divName= "printreport";
+
+         var printContents = document.getElementById(divName).innerHTML;
+         var originalContents = document.body.innerHTML;
+
+         document.body.innerHTML = printContents;
+
+         window.print();
+
+         document.body.innerHTML = originalContents;
+    }
 
 </script>
 @endsection

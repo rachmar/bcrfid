@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Report;
 use App\Model\Student;
 use App\Model\Section;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LogsExport;
 
 class ReportController extends Controller
 {
@@ -125,33 +127,8 @@ class ReportController extends Controller
     }
 
 
-    public function search(Request $request)
-    {   
-
-
-        $trades = Account::where('type','trade')->get();
-
-        $transactions = new Transaction;
-
-        $transactions = $transactions->selectRaw('accounts.id, transactions.trans_id, transactions.method , accounts.name , accounts.type, transactions.created_at , sum(transactions.grams) as total_grams , sum(transactions.total) as total_price');
-        $transactions = $transactions->join('accounts', 'transactions.account_id', '=', 'accounts.id');
-
-            if ($request->trade_id != 0) {
-                 $transactions = $transactions->where('transactions.account_id' , $request->trade_id);
-            }
-
-            if (isset($request->from) && isset($request->to)) {
-                  $transactions = $transactions->whereBetween('transactions.created_at', array($request->from, $request->to));
-            }
-
-        $transactions =$transactions->groupBy('transactions.trans_id');
-
-
-        $total = $transactions->sum('total');
-
-        $transactions = $transactions->get();
-
-
-        return view('pages.admin.report.index',compact('transactions', 'trades' , 'total'));
-    } 
+    public function export()
+    {
+      return Excel::download(new LogsExport, "UserLogs".date('mdY').".xlsx");
+    }
 }
