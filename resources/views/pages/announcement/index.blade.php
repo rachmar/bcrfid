@@ -65,6 +65,9 @@
               <div class="form-group">
                 <label for="sct_id">Section</label>
                 <select id="sct_id" name="sct_id" class="form-control">
+                   <option value="all"> All Student </option>
+                   <option value="only_eleven"> Only Grade 11 </option>
+                   <option value="only_twelve"> Only Grade 12 </option>
 	            	  @foreach ($sections as $section)
            				 <option value="{{ $section->id }}"> {{ $section->grade }} - {{ $section->name}} </option>
         			    @endforeach
@@ -73,7 +76,7 @@
 
               <div class="form-group">
                 <label for="msg">Message</label>
-                <textarea id="msg" name="msg" class="form-control" rows="10"></textarea>
+                <textarea id="msg" name="msg" class="form-control" rows="10" required></textarea>
               </div>
             
 			  </div>
@@ -127,7 +130,7 @@
         swal.fire({
             title: 'Sending Announcement To Queue!',
             html: 'This will close in <b></b> seconds.',
-            timer: 10000,
+            timer: 5000,
             showConfirmButton: false,
             allowOutsideClick: false,
             onBeforeOpen: () => {

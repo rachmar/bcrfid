@@ -54,8 +54,29 @@ class AnnouncementController extends Controller
         $announcement->msg = $request->msg;
         $announcement->save();
 
-
         $phones = Student::select('phone')->where('sct_id', $request->sct_id)->get();
+
+        if (!is_numeric($request->sct_id)) {
+
+            if (strcasecmp( $request->sct_id, 'only_eleven' ) == 0) {
+                $phones = Student::selectRaw('students.phone,sections.grade')
+                ->join('sections', 'students.sct_id', '=', 'sections.id')
+                ->where('sections.grade', 11)
+                ->get();
+            }
+
+            if (strcasecmp( $request->sct_id, 'only_twelve' ) == 0) {
+                $phones = Student::selectRaw('students.phone,sections.grade')
+                ->join('sections', 'students.sct_id', '=', 'sections.id')
+                ->where('sections.grade', 12)
+                ->get();
+            }
+
+            if(strcasecmp( $request->sct_id, 'all' ) == 0 ){
+                $phones = Student::select('phone')->get();
+            }
+        }
+
         $rphones = array();
         foreach ($phones as $phone) {
             $rphones[] = $phone->phone;
@@ -63,6 +84,7 @@ class AnnouncementController extends Controller
 
         $rphones = implode(',', $rphones);
 
+        echo $rphones;
         $client = new Client();
         $res = $client->request('POST', 'https://semaphore.co/api/v4/messages',[
             'form_params' =>  [
@@ -74,7 +96,6 @@ class AnnouncementController extends Controller
         ]);
 
         echo $res->getStatusCode();
-
         echo $res->getBody();
 
     }
