@@ -15,6 +15,44 @@
     
     <li class="header">Main Menu</li>
 
+
+    @if (Auth::user()->isAdmin())
+
+      <li class="{{ Request::segment(2) === 'student' ? 'active' : '' }}">
+        <a href="{{ route('student.index') }}">
+          <i class="fa fa-users" aria-hidden="true"></i>
+            <span>Students</span>
+        </a>
+      </li>
+
+      <li class="{{ Request::segment(2) === 'announcement' ? 'active' : '' }}">
+        <a href="{{ route('announcement.index') }}">
+          <i class="fa fa-microphone" aria-hidden="true"></i>
+            <span>Announcements</span>
+        </a>
+      </li>
+
+
+      <li class="{{ Request::segment(2) === 'report' ? 'active' : '' }}">
+        <a href="{{ route('report.index') }}">
+          <i class="fa fa-pie-chart" aria-hidden="true"></i>
+            <span>Reports</span>
+        </a>
+      </li>
+
+
+      <li class="{{ Request::segment(2) === 'setting' ? 'active' : '' }}">
+        <a href="{{ route('setting.index') }}">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+            <span>Settings</span>
+        </a>
+      </li>
+
+
+
+    @endif
+
+
     @if (Auth::user()->isOSA())
 
       <li class="{{ Request::segment(2) === 'student' ? 'active' : '' }}">

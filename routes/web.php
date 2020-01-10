@@ -21,14 +21,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
 	'prefix' => 'osa', 
 	'middleware' => ['auth','checkrole'], 
-	'roles' => ['OSA'] ], function () {
+	'roles' => ['OSA','Admin'] ], function () {
 	Route::resource('student', 'StudentController');
 });
 
 Route::group([
 	'prefix' => 'principal', 
 	'middleware' => ['auth','checkrole'], 
-	'roles' => ['Principal'] ], function () {
+	'roles' => ['Principal','Admin'] ], function () {
 	Route::resource('announcement', 'AnnouncementController');
 	Route::resource('setting', 'SettingController');
 
@@ -37,7 +37,7 @@ Route::group([
 Route::group([
 	'prefix' => 'report', 
 	'middleware' => ['auth','checkrole'], 
-	'roles' => ['Principal','Teacher'] ], function () {
+	'roles' => ['Principal','Teacher','Admin'] ], function () {
 	Route::resource('report', 'ReportController');
 });
 

@@ -18,9 +18,19 @@ class UserSeederTable extends Seeder
         DB::table('users')->truncate();
         DB::table('user_roles')->truncate();
 
+        $role_admin  = Role::where('name', 'Admin')->first();
         $role_osa  = Role::where('name', 'OSA')->first();
         $role_principal  = Role::where('name', 'Principal')->first();
         $role_teacher  = Role::where('name', 'Teacher')->first();
+
+
+        $admin = new User();
+        $admin->name = 'ADMIN ADMIN';
+        $admin->email = 'admin@bcrfid.com';
+        $admin->username = 'admin';
+        $admin->password = bcrypt('adminadmin');
+        $admin->save();
+        $admin->roles()->attach($role_admin);
 
         $osa = new User();
         $osa->name = 'OSA OSA';

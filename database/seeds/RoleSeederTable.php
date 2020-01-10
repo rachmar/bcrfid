@@ -16,6 +16,11 @@ class RoleSeederTable extends Seeder
         DB::table('roles')->truncate();
         
         $osa = new Role();
+        $osa->name = 'Admin';
+        $osa->description = 'The Admin';
+        $osa->save();
+
+        $osa = new Role();
         $osa->name = 'OSA';
         $osa->description = 'The OSA';
         $osa->save();
