@@ -102,8 +102,10 @@
 			              <th>Date</th>
 			              <th>Card ID</th>
 			              <th>Student ID</th>
-			              <th>Name</th>
-			              <th>Purpose</th>
+<th>Firstname</th>
+              <th>Middlename</th>
+              <th>Lastname</th>
+              			              <th>Purpose</th>
 			              <th>Section</th>
 			            </tr>
 			          </thead>
@@ -113,7 +115,9 @@
 			                  <td>{{ $report->created_at->format('Y/m/d - h:i a')}}</td>
 			                  <td>{{ strtoupper($report->crd_id) }}</td>
 			                  <td>{{ strtoupper($report->std_id) }}</td>
-			                  <td>{{ strtoupper($report->name) }}</td>
+                  <td>{{ strtoupper($report->firstname) }}</td>
+                  <td>{{ strtoupper($report->middlename) }}</td>
+                  <td>{{ strtoupper($report->lastname) }}</td>
 			                  <td>{{ strtoupper($report->purpose) }}</td>
 			                  <td>{{ strtoupper($report->sectgrade) }} - {{ strtoupper($report->sectname) }}</td>
 			                </tr>

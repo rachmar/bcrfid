@@ -46,7 +46,7 @@ class ReportController extends Controller
         //
         $sections = Section::all();
 
-        $reports = Report::selectRaw('students.crd_id,students.std_id,students.name,reports.created_at,reports.purpose, students.name , sections.id , sections.name as sectname, sections.grade as sectgrade')
+        $reports = Report::selectRaw('students.crd_id,students.std_id,students.firstname,students.middlename,students.lastname,reports.created_at,reports.purpose , sections.id , sections.name as sectname, sections.grade as sectgrade')
             ->join('sections', 'reports.sct_id', '=', 'sections.id')
             ->join('students', 'reports.std_id', '=', 'students.id');
 

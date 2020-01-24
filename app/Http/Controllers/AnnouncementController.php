@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Announcement;
 use App\Model\Section;
 use App\Model\Student;
+use App\Model\Log;
+use Auth;
 
 class AnnouncementController extends Controller
 {
@@ -46,8 +48,6 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-
-
 
         $announcement = new Announcement();
         $announcement->sct_id = $request->sct_id;
@@ -91,12 +91,19 @@ class AnnouncementController extends Controller
                 'apikey' => 'c065acbea63c2815207e68778f423712',
                 'number' => $rphones,
                 'message' => $request->msg,
-                'sendername' => 'SEMAPHORE'
+                'sendername' => 'BROKENSHIRE'
             ]
         ]);
 
         echo $res->getStatusCode();
         echo $res->getBody();
+
+
+
+        $log = new Log();
+        $log->msg =  Auth()->user()->name.' created an announcement';
+        $log->save();
+
 
     }
 

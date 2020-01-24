@@ -6,7 +6,8 @@ use App\User;
 use App\Model\Role;
 use App\Model\Section;
 use Illuminate\Http\Request;
-
+use App\Model\Log;
+use Auth;
 
 class SettingController extends Controller
 {
@@ -63,6 +64,11 @@ class SettingController extends Controller
                 $user->save();
                 $user->roles()->attach($teacher);
 
+
+                $log = new Log();
+                $log->msg =  Auth()->user()->name.' create a new teacher, Teacher : '.$request->name;
+                $log->save();
+
                 break;
 
             case 'section':
@@ -71,6 +77,10 @@ class SettingController extends Controller
                 $section->grade = $request->grade;
                 $section->name = $request->name;
                 $section->save();
+
+                $log = new Log();
+                $log->msg =  Auth()->user()->name.' create a new section, Section : '.$request->name;
+                $log->save();
 
                 break;
             

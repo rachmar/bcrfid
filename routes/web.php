@@ -16,6 +16,14 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('search', 'SearchController');
+
+Route::group([
+	'prefix' => 'admin', 
+	'middleware' => ['auth','checkrole'], 
+	'roles' => ['Admin'] ], function () {
+	Route::resource('log', 'LogController');
+});
 
 
 Route::group([

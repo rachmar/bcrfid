@@ -56,7 +56,5 @@ class UserSeederTable extends Seeder
         $teacher->save();
         $teacher->roles()->attach($role_teacher);
 
-
-
     }
 }

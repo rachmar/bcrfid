@@ -21,7 +21,10 @@
             <tr>
               <th>Card ID</th>
               <th>Student ID</th>
-              <th>Name</th>
+              <th>Photo</th>
+              <th>Firstname</th>
+              <th>Middlename</th>
+              <th>Lastname</th>
               <th>Section</th>
               <th>Parent</th>
               <th>Phone</th>
@@ -34,7 +37,10 @@
                 <tr>
                   <td>{{ strtoupper($student->crd_id) }}</td>
                   <td>{{ strtoupper($student->std_id) }}</td>
-                  <td>{{ strtoupper($student->name) }}</td>
+                  <td><img  src="{{asset('storage/'.$student->photo)}}"  width="50" height="50"></td>
+                  <td>{{ strtoupper($student->firstname) }}</td>
+                  <td>{{ strtoupper($student->middlename) }}</td>
+                  <td>{{ strtoupper($student->lastname) }}</td>
                   <td>{{ strtoupper($student->sectgrade) }} - {{ strtoupper($student->sectname) }} </td>
                   <td>{{ strtoupper($student->parent) }}</td>
                   <td>{{ strtoupper($student->phone) }}</td>
@@ -45,7 +51,9 @@
                             data-id="{{ $student->id }}"
                             data-std_id="{{ $student->std_id }}"
                             data-crd_id="{{ $student->crd_id }}"
-                            data-name="{{ $student->name }}"
+                            data-firstname="{{ $student->firstname }}"
+                            data-middlename="{{ $student->middlename }}"
+                            data-lastname="{{ $student->lastname }}"
                             data-sct_id="{{ $student->sct_id }}"
                             data-parent="{{ $student->parent }}"
                             data-phone="{{ $student->phone }}"
@@ -66,7 +74,10 @@
            <tr>
               <th>Card ID</th>
               <th>Student ID</th>
-              <th>Name</th>
+              <th>Photo</th>
+              <th>Firstname</th>
+              <th>Middlename</th>
+              <th>Lastname</th>
               <th>Section</th>
               <th>Parent</th>
               <th>Phone</th>
@@ -84,7 +95,7 @@
 
 <div class="modal fade" id="AddStudent">
 	<div class="modal-dialog">
-		<form  action="{{ route('student.store') }}" method="POST">
+		<form  action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
 			{{csrf_field()}}
 			<div class="modal-content">
 			  <div class="modal-header">
@@ -94,39 +105,58 @@
 			  </div>
 			  <div class="modal-body">
 		    	
-		    	<div class="form-group">
-		     		<label>Card ID (*)</label>
-		            <input type="text"  name="crd_id" class="form-control" required>
-		        </div>
+		    	<div class="row">
+		    		<div class="form-group col-md-6">
+		     			<label>Card ID (*)</label>
+		            	<input type="text"  name="crd_id" class="form-control" autocomplete="off" required>
+			        </div>
+		    		<div class="form-group col-md-6">
+			     		<label>Student ID (*)</label>
+			            <input type="text"  name="std_id" class="form-control" autocomplete="off" required>
+			        </div>
+		    	</div>
 
-				<div class="form-group">
-		     		<label>Student ID (*)</label>
-		            <input type="text"  name="std_id" class="form-control" required>
-		        </div>
+		    	<div class="row">
+		    		<div class="form-group col-md-6">
+			     		<label>Firstname (*)</label>
+			            <input type="text" name="firstname" class="form-control" autocomplete="off" required>
+			        </div>
+			        <div class="form-group col-md-6">
+			     		<label>Lastname (*)</label>
+			            <input type="text" name="lastname" class="form-control" autocomplete="off" required>
+			        </div>
+		    	</div>
 
-		    	<div class="form-group">
-		     		<label>Name (*)</label>
-		            <input type="text" name="name" class="form-control" required>
-		        </div>
-
-		    	<div class="form-group">
-		     		<label>Section</label>
-		            <select name="sct_id" class="form-control">
-		            	@foreach ($sections as $section)
-               				<option value="{{ $section->id }}"> {{ $section->grade }} - {{ $section->name}} </option>
-            			@endforeach
-		            </select>
-		        </div>
-
-		    	<div class="form-group">
-		     		<label>Parent(*)</label>
-		            <input type="text" name="parent"  class="form-control" required>
-		        </div>
-
-		    	<div class="form-group">
-		     		<label>Phone Num (*)</label>
-		            <input type="number"  min="11" name="phone"  class="form-control" required>
-		        </div>
+		    	<div class="row">
+			        <div class="form-group col-md-6">
+			     		<label>Middlename </label>
+			            <input type="text" name="middlename" class="form-control"  autocomplete="off" required>
+			        </div>
+		    		<div class="form-group col-md-6">
+			     		<label>Section</label>
+			            <select name="sct_id" class="form-control">
+			            	@foreach ($sections as $section)
+	               				<option value="{{ $section->id }}"> {{ $section->grade }} - {{ $section->name}} </option>
+	            			@endforeach
+			            </select>
+			        </div>
+		    	</div>
+		    	<div class="row">
+			        <div class="form-group col-md-6">
+			     		<label>Parent(*)</label>
+			            <input type="text" name="parent"  class="form-control" autocomplete="off" required>
+			        </div>
+			        <div class="form-group col-md-6">
+			     		<label>Phone Num (*)</label>
+			            <input type="number"  min="11" name="phone"  class="form-control"  autocomplete="off"required>
+			        </div>
+		    	</div>
+		    	<div class="row">
+			        <div class="form-group col-md-12">
+			     		<label>Photo(*)</label>
+			            <input type="file" name="photo"  class="form-control" autocomplete="off" required>
+			        </div>
+		    	</div>
 
 
 			  </div>
@@ -141,7 +171,7 @@
 
 <div class="modal fade" id="EditStudent">
 	<div class="modal-dialog">
-		<form  action="{{ route('student.update', 'update' ) }}" method="POST">
+		<form  action="{{ route('student.update', 'update' ) }}" method="POST" enctype="multipart/form-data">
 			{{csrf_field()}}
         	{{ method_field('PUT') }}
 			<div class="modal-content">
@@ -154,22 +184,34 @@
 				
 				<input type="hidden" id="id" name="id" class="form-control" >
 
-				<div class="form-group">
-		     		<label>Card ID</label>
-		            <input type="text"  id="crd_id" name="crd_id" class="form-control" required>
-		        </div>
+				<div class="row">
+		    		<div class="form-group col-md-6">
+			     		<label>Card ID</label>
+			            <input type="text"  id="crd_id" name="crd_id" class="form-control" required>
+			        </div>
+		    		<div class="form-group col-md-6">
+			     		<label>Student ID</label>
+			            <input type="text"  id="std_id" name="std_id" class="form-control" required>
+			        </div>
+			    </div>
 
-				<div class="form-group">
-		     		<label>Student ID</label>
-		            <input type="text"  id="std_id" name="std_id" class="form-control" required>
-		        </div>
+		        <div class="row">
+		    		<div class="form-group col-md-6">
+			     		<label>Firstname</label>
+			            <input type="text" id="firstname" name="firstname" class="form-control" autocomplete="off" required>
+			        </div>
+			        <div class="form-group col-md-6">
+			     		<label>Lastname</label>
+			            <input type="text"  id="lastname" name="lastname" class="form-control" autocomplete="off" required>
+			        </div>
+		    	</div>
 
-		    	<div class="form-group">
-		     		<label>Name</label>
-		            <input type="text" id="name" name="name" class="form-control" required>
-		        </div>
-
-		    	<div class="form-group">
+		    	<div class="row">
+			        <div class="form-group col-md-6">
+			     		<label>Middlename</label>
+			            <input type="text" id="middlename" name="middlename" class="form-control"  autocomplete="off" required>
+			        </div>
+		    		<div class="form-group col-md-6">
 			     		<label>Section</label>
 			            <select id="sct_id" name="sct_id" class="form-control">
 			            	@foreach ($sections as $section)
@@ -177,18 +219,23 @@
 	            			@endforeach
 			            </select>
 			        </div>
-
-		    	<div class="form-group">
-		     		<label>Parent</label>
-		            <input type="text" id="parent" name="parent"  class="form-control" required>
-		        </div>
-
-		    	<div class="form-group">
-		     		<label>Phone Num</label>
-		            <input type="number"  name="phone"  class="form-control" required>
-		        </div>
-
-
+		    	</div>
+		    	<div class="row">
+			        <div class="form-group col-md-6">
+			     		<label>Parent(*)</label>
+			            <input type="text" id="parent" name="parent"  class="form-control" autocomplete="off" required>
+			        </div>
+			        <div class="form-group col-md-6">
+			     		<label>Phone Num (*)</label>
+			            <input type="number"   id="phone" min="11" name="phone"  class="form-control"  autocomplete="off"required>
+			        </div>
+		    	</div>
+		    	<div class="row">
+			        <div class="form-group col-md-12">
+			     		<label>Change Photo(*)</label>
+			            <input type="file" name="photo"  class="form-control">
+			        </div>
+		    	</div>
 			  </div>
 			  <div class="modal-footer">
 			    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button>
@@ -208,14 +255,18 @@
         var id= $(e.relatedTarget).data('id');
         var crd_id= $(e.relatedTarget).data('crd_id');
         var std_id= $(e.relatedTarget).data('std_id');
-        var name= $(e.relatedTarget).data('name');
+        var firstname= $(e.relatedTarget).data('firstname');
+        var middlename= $(e.relatedTarget).data('middlename');
+        var lastname= $(e.relatedTarget).data('lastname');
         var sct_id= $(e.relatedTarget).data('sct_id');
         var parent= $(e.relatedTarget).data('parent');
         var phone= $(e.relatedTarget).data('phone');
 
         $(e.currentTarget).find('input[id="id"]').val(id);
         $(e.currentTarget).find('select[id="sct_id"]').val(sct_id);
-        $(e.currentTarget).find('input[id="name"]').val(name);
+        $(e.currentTarget).find('input[id="firstname"]').val(firstname);
+        $(e.currentTarget).find('input[id="middlename"]').val(middlename);
+        $(e.currentTarget).find('input[id="lastname"]').val(lastname);
         $(e.currentTarget).find('input[id="parent"]').val(parent);
         $(e.currentTarget).find('input[id="phone"]').val(phone);
         $(e.currentTarget).find('input[id="std_id"]').val(std_id);

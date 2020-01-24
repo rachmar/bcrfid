@@ -16,7 +16,7 @@
       </div>
       <div class="box-body">
 
-        <table id="datatable" class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th width="20%">Created On</th>

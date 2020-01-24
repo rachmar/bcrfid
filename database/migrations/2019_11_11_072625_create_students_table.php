@@ -18,9 +18,12 @@ class CreateStudentsTable extends Migration
             $table->string('crd_id');
             $table->string('std_id');
             $table->integer('sct_id');
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('middlename')->nullable();
+            $table->string('lastname');
             $table->string('parent');
             $table->string('phone');
+            $table->string('photo')->nullable();
             $table->boolean('islogged')->default(0);
             $table->timestamps();
         });

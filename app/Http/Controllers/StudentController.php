@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Student;
 use App\Model\Section;
-
+use App\Model\Log;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -50,10 +51,21 @@ class StudentController extends Controller
         $student->crd_id = $request->crd_id;
         $student->std_id = $request->std_id;
         $student->sct_id = $request->sct_id;
-        $student->name = $request->name;
+        $student->firstname = $request->firstname;
+        $student->middlename = $request->middlename;
+        $student->lastname = $request->lastname;
         $student->parent = $request->parent;
         $student->phone = $request->phone;
+        if (!empty($request->photo)) {
+            $filename  = 'item-img-'.md5(uniqid()).date('dmY').'.' .$request->photo->getClientOriginalExtension();
+            $student->photo = $request->photo->storeAs('', $filename, 'public');
+        }
         $student->save();
+
+
+        $log = new Log();
+        $log->msg =  Auth()->user()->name.' register a new student, Student ID: '.$request->std_id;
+        $log->save();
 
         return redirect()->back()->with(['title'=>'Success!','status'=>'Student Succesfully Created!','mode'=>'success']);
     }
@@ -93,10 +105,20 @@ class StudentController extends Controller
         $student->crd_id = $request->crd_id;
         $student->std_id = $request->std_id;
         $student->sct_id = $request->sct_id;
-        $student->name = $request->name;
+        $student->firstname = $request->firstname;
+        $student->middlename = $request->middlename;
+        $student->lastname = $request->lastname;
         $student->parent = $request->parent;
         $student->phone = $request->phone;
+        if (!empty($request->photo)) {
+            $filename  = 'item-img-'.md5(uniqid()).date('dmY').'.' .$request->photo->getClientOriginalExtension();
+            $student->photo = $request->photo->storeAs('', $filename, 'public');
+        }
         $student->save();
+
+        $log = new Log();
+        $log->msg =  Auth()->user()->name.' update a student, Student ID: '.$request->std_id;
+        $log->save();
 
         return redirect()->back()->with(['title'=>'Success!','status'=>'Student Succesfully Edited!','mode'=>'success']);
     }

@@ -1,6 +1,8 @@
 $( document ).ready(function() {
 
-  $('#datatable').DataTable();
+  $('#datatable').DataTable({
+  	  "scrollX": true
+  });
 
   $(".delete").submit(function (e) {
   	

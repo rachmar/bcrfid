@@ -48,6 +48,12 @@
         </a>
       </li>
 
+      <li class="{{ Request::segment(2) === 'log' ? 'active' : '' }}">
+        <a href="{{ route('log.index') }}">
+          <i class="fa fa-file" aria-hidden="true"></i>
+            <span>Logs</span>
+        </a>
+      </li>
 
 
     @endif

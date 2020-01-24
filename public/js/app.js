@@ -101863,7 +101863,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-  $('#datatable').DataTable();
+  $('#datatable').DataTable({
+    "scrollX": true
+  });
   $(".delete").submit(function (e) {
     var _this = this;
 
