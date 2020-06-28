@@ -64,7 +64,7 @@ class SearchController extends Controller
             $report->purpose = $purpose;
             $report->save();
 
-            // $this->sendMessageSemaphore($student,$purpose);
+            $this->sendMessageSemaphore($student,$purpose);
              
         }
 
